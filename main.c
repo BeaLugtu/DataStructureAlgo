@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
 #include <windows.h>
+
 #define MAX_SIZE 100
 
 #define pf printf
@@ -76,7 +79,6 @@ int main()
         {
             printf("Invalid choice! Press ENTER and try again. \n");
             getch();
-            system("cls");
         }
     }
 
@@ -126,7 +128,6 @@ void handle1DArrayChoiceNoArgument()
             // Clear the input buffer
             while (getchar() != '\n')
                 ;
-            return 1; // Continue the program
         }
 
         // Perform the corresponding operation for 1D array
@@ -155,7 +156,6 @@ void handle1DArrayChoiceNoArgument()
             break;
         }
     } while (1);
-    return 1;
 }
 
 // Function to handle the user's choice for 1D array operations
@@ -295,6 +295,7 @@ int handle2DArrayChoice(int choice)
         transpose();
         break;
     case 3:
+        system("cls");
         implementStack();
         break;
     default:
@@ -325,7 +326,6 @@ void handle2DArrayChoiceNoArgument()
         // Clear the input buffer
         while (getchar() != '\n')
             ;
-        return 1; // Continue the program
     }
 
     // Perform the corresponding operation for 2D array
@@ -340,13 +340,12 @@ void handle2DArrayChoiceNoArgument()
         handle2DArrayChoiceNoArgument();
         break;
     case 3:
+        system("cls");
         implementStack();
         break;
     default:
         break;
     }
-
-    return 1; // Continue the program
 }
 // Function to handle the user's choice for exiting the program
 int handleExitChoice()
@@ -375,6 +374,7 @@ int handleExitChoice()
             printf("Invalid choice for exit confirmation. Please enter 1 or 0.\n");
         }
     }
+    return 1;
 }
 
 // pufbsdfjbjfsbjsfefs
