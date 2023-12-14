@@ -1,4 +1,4 @@
-# Data Algorithm\
+# Data Algorithm
 
 1D
 - Traverse
