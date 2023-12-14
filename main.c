@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <windows.h>
 #define MAX_SIZE 100
 
 // Function prototypes
@@ -54,7 +55,9 @@ int main()
         }
         else
         {
-            printf("Invalid choice! \n");
+            printf("Invalid choice! Press ENTER and try again. \n");
+            getch();
+            system("cls");
         }
     }
 
@@ -64,11 +67,16 @@ int main()
 // Function to display the main menu
 void displayMainMenu()
 {
-    printf("\nMain Menu:\n");
+    printf("+------------------------+\n");
+    printf("|   DATA STRUCTURES  &   |\n");
+    printf("|   ALGORITHMS LESSONS   |\n");
+    printf("+------------------------+\n");
+
+    printf("\nMAIN MENU\n");
     printf("1. 1D Array Operations\n");
     printf("2. 2D Array Operations\n");
     printf("3. Exit\n");
-    printf("Enter your choice: ");
+    printf("\nEnter your choice: ");
 }
 
 // Function to display the main menu without getting arguments
@@ -78,6 +86,10 @@ void handle1DArrayChoiceNoArgument()
 
     do
     {
+        printf("+------------------------+\n");
+        printf("|       1D   ARRAY       |\n");
+        printf("|       OPERATIONS       |\n");
+        printf("+------------------------+\n");
         // Display the 1D array operations menu
         printf("\n 1D Array Operations:\n");
         printf("1. Traverse\n");
@@ -131,13 +143,17 @@ void handle1DArrayChoiceNoArgument()
 // Function to handle the user's choice for 1D array operations
 int handle1DArrayChoice(int choice)
 {
-    printf("\n 1D Array Operations:\n");
-    printf("1. Traverse\n");
+    printf("+------------------------+\n");
+    printf("|       1D   ARRAY       |\n");
+    printf("|       OPERATIONS       |\n");
+    printf("+------------------------+\n");
+
+    printf("\n1. Traverse\n");
     printf("2. Insert Sorted\n");
     printf("3. Insert Unsorted\n");
     printf("4. Remove Element\n");
     printf("5. Back to Main Menu\n");
-    printf("Enter your choice: ");
+    printf("\nEnter your choice: ");
 
     // Check if input is an integer
     if (scanf("%d", &choice) != 1)
@@ -168,7 +184,10 @@ int handle1DArrayChoice(int choice)
         system("cls");
         break;
     default:
-        printf("Invalid choice for 1D Array Operations\n");
+        printf("Invalid choice for 1D Array Operations! Press ENTER and try again.\n");
+        getch();
+        system("cls");
+        handle1DArrayChoice(0);
         break;
     }
 
@@ -249,12 +268,17 @@ void traverse1D()
 {
     system("cls");
     int numArrays = 0;
+    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleInfo);
+    WORD originalColor = consoleInfo.wAttributes;
 
     while (1)
     {
         int size;
-        printf("CHOSEN 1D OPERATION: TRAVERSE \n\n");
-        printf("Enter the size of array: ", numArrays + 1);
+        printf("+------------------------+\n");
+        printf("|       1D TRAVERSE      |\n");
+        printf("+------------------------+\n");
+        printf("\nEnter the size of array: ", numArrays + 1);
 
         // Check if input is an integer
         while (scanf("%d", &size) != 1 || size <= 0)
@@ -269,7 +293,7 @@ void traverse1D()
         int array[size];
 
         // Ask for array elements
-        printf("Enter elements for array:\n", size, numArrays + 1);
+        printf("\nENTER ELEMENTS FOR ARRAY\n", size, numArrays + 1);
         for (int i = 0; i < size; ++i)
         {
             printf("Element %d: ", i + 1);
@@ -285,17 +309,21 @@ void traverse1D()
             }
         }
 
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_GREEN);
         // Print the array
         printf("Array elements: ", numArrays + 1);
+
         for (int i = 0; i < size; ++i)
         {
             printf("%d ", array[i]);
         }
         printf("\n");
 
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), originalColor);
+
         // Option to create another array
         char createAnother;
-        printf("Do you want to create another array? (y/n): ");
+        printf("\nDo you want to create another array? (Y/N): ");
         while (scanf(" %c", &createAnother) == 1 && (createAnother == 'y' || createAnother == 'Y'))
         {
             system("cls");
@@ -306,6 +334,7 @@ void traverse1D()
         if (createAnother != 'y' && createAnother != 'Y')
         {
             // Go back to handle1DArrayChoice
+            system("cls");
             handle1DArrayChoice(numArrays);
             break;
         }
@@ -314,8 +343,17 @@ void traverse1D()
 
 void insertSorted1D()
 {
+    system("cls");
+
     int size;
-    printf("Enter the size of the array: ");
+    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleInfo);
+    WORD originalColor = consoleInfo.wAttributes;
+
+    printf("+------------------------+\n");
+    printf("|    1D INSERT SORTED    |\n");
+    printf("+------------------------+\n");
+    printf("\nEnter the size of the array: ");
 
     // Check if input is an integer
     while (scanf("%d", &size) != 1 || size <= 0 || size > MAX_SIZE)
@@ -330,7 +368,7 @@ void insertSorted1D()
     int array[MAX_SIZE];
 
     // Ask for array elements
-    printf("Enter elements to be Sorted:\n", size);
+    printf("\nENTER ELEMENTS TO BE SORTED\n", size);
     for (int i = 0; i < size; ++i)
     {
         printf("Element %d: ", i + 1);
@@ -347,7 +385,7 @@ void insertSorted1D()
     }
 
     // Print the original sorted array
-    printf("Original Array: ");
+    printf("\nOriginal Array: ");
     for (int i = 0; i < size; ++i)
     {
         printf("%d ", array[i]);
@@ -370,7 +408,12 @@ void insertSorted1D()
     }
 
     // Print the sorted array
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_GREEN);
+
     printf("Sorted Array: ");
+
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), originalColor);
+
     for (int i = 0; i < size; ++i)
     {
         printf("%d ", array[i]);
