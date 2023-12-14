@@ -271,8 +271,8 @@ int handle2DArrayChoice(int choice)
     printf("\n 2D Array Operations:\n");
     printf("1. Traverse\n");
     printf("2. Transpose\n");
-    // printf("3. Implement Stack\n");
-    printf("3. Back to Main Menu\n");
+    printf("3. Implement Stack\n");
+    printf("4. Back to Main Menu\n");
     printf("Enter your choice: ");
 
     // Check if input is an integer
@@ -295,7 +295,7 @@ int handle2DArrayChoice(int choice)
         transpose();
         break;
     case 3:
-        // Back to the main menu
+        implementStack();
         break;
     default:
         printf("Invalid choice for 2D Array Operations\n");
@@ -307,13 +307,15 @@ int handle2DArrayChoice(int choice)
 
 void handle2DArrayChoiceNoArgument()
 {
+    system("cls");
+
     int choice;
 
     printf("\n 2D Array Operations:\n");
     printf("1. Traverse\n");
     printf("2. Transpose\n");
-    // printf("3. Implement Stack\n");
-    printf("3. Back to Main Menu\n");
+    printf("3. Implement Stack\n");
+    printf("4. Back to Main Menu\n");
     printf("Enter your choice: ");
 
     // Check if input is an integer
@@ -338,10 +340,9 @@ void handle2DArrayChoiceNoArgument()
         handle2DArrayChoiceNoArgument();
         break;
     case 3:
-        // Back to the main menu
+        implementStack();
         break;
     default:
-        printf("Invalid choice for 2D Array Operations\n");
         break;
     }
 
@@ -981,6 +982,7 @@ void mergeUnsortedArrays()
 // Function prototypes for 2D array operations
 void traverse()
 {
+    system("cls");
 
     int m, n;
     pf("\nEnter number of rows: ");
@@ -1000,12 +1002,14 @@ void traverse()
     char choice, operation;
 
     getchar();
+    system("cls");
 
     pf("\nDo you want to perform an operation on stored elements? (y/n): ");
     sf(" %c", &choice);
 
     if (choice == 'y' || choice == 'Y')
     {
+
         pf("\nChoose an operation to perform on the stored array elements: \n");
         pf("a. Addition\n");
         pf("b. Subtraction\n");
@@ -1051,12 +1055,19 @@ void traverse()
             printf("Press Any Key to Continue...");
             getch();
             handle2DArrayChoiceNoArgument();
+            system("cls");
         }
+    }
+    else
+    {
+        handle2DArrayChoiceNoArgument();
+        system("cls");
     }
 }
 
 void transpose()
 {
+    system("cls");
     int m, n;
     pf("\nEnter number of rows: ");
     sf("%d", &m);
@@ -1071,6 +1082,8 @@ void transpose()
         for (int j = 0; j < n; j++)
             sf("%d", &a[i][j]);
     int i, j;
+
+    system("cls");
 
     pf("\nYour Array Elements before Transposing:\n");
     for (i = 0; i < m; i++)
@@ -1102,4 +1115,131 @@ void transpose()
         getch();
         handle2DArrayChoiceNoArgument();
     }
+    system("cls");
+}
+
+typedef struct
+{
+    int items[MAX_SIZE];
+    int top;
+} Stack;
+
+void initializeStack(Stack *stack)
+{
+    stack->top = -1;
+}
+
+int isEmpty(Stack *stack)
+{
+    return stack->top == -1;
+}
+
+int isFull(Stack *stack)
+{
+    return stack->top == MAX_SIZE - 1;
+}
+
+void push(Stack *stack, int value)
+{
+
+    if (isFull(stack))
+    {
+        printf("Stack overflow: Cannot push element onto a full stack.\n");
+        return;
+    }
+    stack->items[++stack->top] = value;
+    system("cls");
+
+    printf("Element %d inserted.\n", value);
+}
+
+int pop(Stack *stack)
+{
+
+    if (isEmpty(stack))
+    {
+        printf("Stack underflow: Cannot pop element from an empty stack.\n");
+        exit(EXIT_FAILURE);
+    }
+    int poppedValue = stack->items[stack->top--];
+    system("cls");
+
+    printf("Element %d deleted.\n", poppedValue);
+
+    return poppedValue;
+}
+
+void displayStack(Stack *stack)
+{
+
+    if (isEmpty(stack))
+    {
+        printf("Stack is empty.\n");
+        return;
+    }
+
+    printf("Stack: ");
+    for (int i = 0; i <= stack->top; ++i)
+    {
+        printf("%d ", stack->items[i]);
+    }
+    printf("\n");
+}
+
+void implementStack()
+{
+
+    Stack stack;
+    initializeStack(&stack);
+
+    int choice;
+
+    do
+    {
+        printf("\nMenu:\n");
+        printf("1. Insert (Push)\n");
+        printf("2. Delete (Pop)\n");
+        printf("3. Display\n");
+        printf("4. Exit Program\n");
+
+        printf("Enter your choice (1-4): ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+        {
+            int value;
+            printf("Enter the value to insert: ");
+            scanf("%d", &value);
+            push(&stack, value);
+            break;
+        }
+
+        case 2:
+        {
+            pop(&stack);
+            break;
+        }
+
+        case 3:
+        {
+            displayStack(&stack);
+            break;
+        }
+
+        case 4:
+        {
+            handle2DArrayChoiceNoArgument();
+            break;
+        }
+
+        default:
+        {
+            printf("Invalid choice. Please enter a number between 1 and 4.\n");
+        }
+        }
+
+    } while (choice != 4);
+    system("cls");
 }
