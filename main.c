@@ -242,6 +242,7 @@ int handleExitChoice()
     }
 }
 
+// pufbsdfjbjfsbjsfefs
 // Function prototypes for 1D array operations
 void traverse1D()
 {
@@ -428,12 +429,14 @@ void insertSorted1D()
 }
 
 // Function to insert an element into an unsorted 1D array
-void insertUnsorted1D() {
+void insertUnsorted1D()
+{
     int size;
     printf("Enter the size of the array: ");
 
     // Check if input is an integer
-    while (scanf("%d", &size) != 1 || size <= 0 || size > MAX_SIZE) {
+    while (scanf("%d", &size) != 1 || size <= 0 || size > MAX_SIZE)
+    {
         printf("Invalid input. Please enter a positive integer less than or equal to %d for array size: ", MAX_SIZE);
 
         // Clear the input buffer
@@ -445,11 +448,13 @@ void insertUnsorted1D() {
 
     // Ask for array elements
     printf("Enter elements for Unsorted array:\n", size);
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i)
+    {
         printf("Element %d: ", i + 1);
 
         // Check if input is an integer
-        while (scanf("%d", &array[i]) != 1) {
+        while (scanf("%d", &array[i]) != 1)
+        {
             printf("Invalid input. Please enter an integer: ");
 
             // Clear the input buffer
@@ -460,27 +465,32 @@ void insertUnsorted1D() {
 
     // Print the original unsorted array
     printf("Original Unsorted Array: ");
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i)
+    {
         printf("%d ", array[i]);
     }
     printf("\n");
 
     // Option to insert another element
     char insertAnother;
-    do {
+    do
+    {
         int elementToInsert, positionToInsert;
 
         printf("Do you want to insert another element? (y/n): ");
-        while (scanf(" %c", &insertAnother) == 1 && (insertAnother == 'y' || insertAnother == 'Y')) {
+        while (scanf(" %c", &insertAnother) == 1 && (insertAnother == 'y' || insertAnother == 'Y'))
+        {
             printf("Enter the element to insert: ");
-            while (scanf("%d", &elementToInsert) != 1) {
+            while (scanf("%d", &elementToInsert) != 1)
+            {
                 printf("Invalid input. Please enter an integer: ");
                 while (getchar() != '\n')
                     ;
             }
 
             printf("Enter the position to insert (1 to %d): ", size + 1);
-            while (scanf("%d", &positionToInsert) != 1 || positionToInsert < 1 || positionToInsert > size + 1) {
+            while (scanf("%d", &positionToInsert) != 1 || positionToInsert < 1 || positionToInsert > size + 1)
+            {
                 printf("Invalid input. Please enter a valid position: ");
 
                 // Clear the input buffer
@@ -489,7 +499,8 @@ void insertUnsorted1D() {
             }
 
             // Shift elements to make space for the new element
-            for (int i = size; i >= positionToInsert; --i) {
+            for (int i = size; i >= positionToInsert; --i)
+            {
                 array[i] = array[i - 1];
             }
 
@@ -501,7 +512,8 @@ void insertUnsorted1D() {
 
             // Print the updated unsorted array
             printf("Updated Unsorted Array: ");
-            for (int i = 0; i < size; ++i) {
+            for (int i = 0; i < size; ++i)
+            {
                 printf("%d ", array[i]);
             }
             printf("\n");
