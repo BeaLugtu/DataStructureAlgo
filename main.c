@@ -7,6 +7,7 @@ int handle1DArrayChoice(int choice);
 int handle2DArrayChoice(int choice);
 int handleExitChoice();
 
+//COMMENT
 // Function prototypes for 1D array operations
 void traverse1D();
 void insertSorted1D();
