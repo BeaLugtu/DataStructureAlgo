@@ -2,6 +2,9 @@
 #include <windows.h>
 #define MAX_SIZE 100
 
+#define pf printf
+#define sf scanf
+
 // Function prototypes
 void displayMainMenu();
 int handle1DArrayChoice(int choice);
@@ -9,6 +12,8 @@ int handle1DArrayChoice(int choice);
 void handle1DArrayChoiceNoArgument();
 
 int handle2DArrayChoice(int choice);
+void handle2DArrayChoiceNoArgument();
+
 int handleExitChoice();
 
 void mergeArray();
@@ -29,6 +34,9 @@ void mergeSortedArrays();
 // Function prototypes for 2D array operations
 void traverse2D();
 void implementStack();
+
+void traverse();
+void transpose();
 
 int main()
 {
@@ -246,7 +254,7 @@ void mergeArray()
 
         case 3:
         {
-            return;
+            handle1DArrayChoiceNoArgument();
         }
 
         default:
@@ -262,7 +270,8 @@ int handle2DArrayChoice(int choice)
 {
     printf("\n 2D Array Operations:\n");
     printf("1. Traverse\n");
-    printf("2. Implement Stack\n");
+    printf("2. Transpose\n");
+    // printf("3. Implement Stack\n");
     printf("3. Back to Main Menu\n");
     printf("Enter your choice: ");
 
@@ -280,10 +289,10 @@ int handle2DArrayChoice(int choice)
     switch (choice)
     {
     case 1:
-        traverse2D();
+        traverse();
         break;
     case 2:
-        implementStack();
+        transpose();
         break;
     case 3:
         // Back to the main menu
@@ -296,6 +305,48 @@ int handle2DArrayChoice(int choice)
     return 1; // Continue the program
 }
 
+void handle2DArrayChoiceNoArgument()
+{
+    int choice;
+
+    printf("\n 2D Array Operations:\n");
+    printf("1. Traverse\n");
+    printf("2. Transpose\n");
+    // printf("3. Implement Stack\n");
+    printf("3. Back to Main Menu\n");
+    printf("Enter your choice: ");
+
+    // Check if input is an integer
+    if (scanf("%d", &choice) != 1)
+    {
+        printf("Invalid input. Please enter an integer.\n");
+        // Clear the input buffer
+        while (getchar() != '\n')
+            ;
+        return 1; // Continue the program
+    }
+
+    // Perform the corresponding operation for 2D array
+    switch (choice)
+    {
+    case 1:
+        traverse();
+        handle2DArrayChoiceNoArgument();
+        break;
+    case 2:
+        transpose();
+        handle2DArrayChoiceNoArgument();
+        break;
+    case 3:
+        // Back to the main menu
+        break;
+    default:
+        printf("Invalid choice for 2D Array Operations\n");
+        break;
+    }
+
+    return 1; // Continue the program
+}
 // Function to handle the user's choice for exiting the program
 int handleExitChoice()
 {
@@ -726,18 +777,329 @@ void removeElement1D()
     }
 }
 
-void mergeUnsortedArrays(){
+void mergeSortedArrays()
+{
+    int size1, size2;
 
+    // Ask for the length of the first array
+    printf("Enter the length of the first array: ");
+    scanf("%d", &size1);
+
+    int arr1[MAX_SIZE];
+    // Ask for elements of the first array
+    printf("Enter elements for the first array:\n");
+    for (int i = 0; i < size1; ++i)
+    {
+        printf("Element %d: ", i + 1);
+        scanf("%d", &arr1[i]);
+    }
+
+    // Ask for the length of the second array
+    printf("Enter the length of the second array: ");
+    scanf("%d", &size2);
+
+    int arr2[MAX_SIZE];
+    // Ask for elements of the second array
+    printf("Enter elements for the second array:\n");
+    for (int i = 0; i < size2; ++i)
+    {
+        printf("Element %d: ", i + 1);
+        scanf("%d", &arr2[i]);
+    }
+
+    // Display the first array
+    printf("First Array: ");
+    for (int i = 0; i < size1; ++i)
+    {
+        printf("%d ", arr1[i]);
+    }
+    printf("\n");
+
+    // Display the second array
+    printf("Second Array: ");
+    for (int i = 0; i < size2; ++i)
+    {
+        printf("%d ", arr2[i]);
+    }
+    printf("\n");
+
+    // Ask the user if they want to merge the arrays
+    char mergeConfirmation;
+    printf("Do you want to merge these arrays? (y/n): ");
+    scanf(" %c", &mergeConfirmation);
+
+    if (mergeConfirmation == 'y' || mergeConfirmation == 'Y')
+    {
+        // Merge the arrays in sorted order
+        int mergedArray[MAX_SIZE * 2];
+        int mergedSize = 0;
+        int i = 0, j = 0, k = 0;
+
+        while (i < size1 && j < size2)
+        {
+            if (arr1[i] < arr2[j])
+            {
+                mergedArray[k++] = arr1[i++];
+            }
+            else
+            {
+                mergedArray[k++] = arr2[j++];
+            }
+        }
+
+        // Copy the remaining elements from the first array, if any
+        while (i < size1)
+        {
+            mergedArray[k++] = arr1[i++];
+        }
+
+        // Copy the remaining elements from the second array, if any
+        while (j < size2)
+        {
+            mergedArray[k++] = arr2[j++];
+        }
+
+        // Display the merged array
+        printf("Merged and Sorted Array: ");
+        for (int i = 0; i < k; ++i)
+        {
+            printf("%d ", mergedArray[i]);
+        }
+        printf("\n");
+
+        // Ask the user if they want to try again or exit
+        char tryAgain;
+        printf("Do you want to try again? (y/n): ");
+        scanf(" %c", &tryAgain);
+
+        if (tryAgain != 'y' && tryAgain != 'Y')
+        {
+            printf("Exiting function.\n");
+            return;
+        }
+    }
+    else
+    {
+        printf("Exiting program.\n");
+    }
 };
-void mergeSortedArrays(){
 
+void mergeUnsortedArrays()
+{
+    int size1, size2;
+
+    // Ask for the length of the first array
+    printf("Enter the length of the first array: ");
+    scanf("%d", &size1);
+
+    int arr1[MAX_SIZE];
+    // Ask for elements of the first array
+    printf("Enter elements for the first array:\n");
+    for (int i = 0; i < size1; ++i)
+    {
+        printf("Element %d: ", i + 1);
+        scanf("%d", &arr1[i]);
+    }
+
+    // Ask for the length of the second array
+    printf("Enter the length of the second array: ");
+    scanf("%d", &size2);
+
+    int arr2[MAX_SIZE];
+    // Ask for elements of the second array
+    printf("Enter elements for the second array:\n");
+    for (int i = 0; i < size2; ++i)
+    {
+        printf("Element %d: ", i + 1);
+        scanf("%d", &arr2[i]);
+    }
+
+    // Display the first array
+    printf("First Array: ");
+    for (int i = 0; i < size1; ++i)
+    {
+        printf("%d ", arr1[i]);
+    }
+    printf("\n");
+
+    // Display the second array
+    printf("Second Array: ");
+    for (int i = 0; i < size2; ++i)
+    {
+        printf("%d ", arr2[i]);
+    }
+    printf("\n");
+
+    // Ask the user if they want to merge the arrays
+    char mergeConfirmation;
+    printf("Do you want to merge these arrays? (y/n): ");
+    scanf(" %c", &mergeConfirmation);
+
+    if (mergeConfirmation == 'y' || mergeConfirmation == 'Y')
+    {
+        // Merge the arrays without sorting
+        int mergedArray[MAX_SIZE * 2];
+        int mergedSize = 0;
+
+        // Copy elements from the first array
+        for (int i = 0; i < size1; ++i)
+        {
+            mergedArray[mergedSize++] = arr1[i];
+        }
+
+        // Copy elements from the second array
+        for (int i = 0; i < size2; ++i)
+        {
+            mergedArray[mergedSize++] = arr2[i];
+        }
+
+        // Display the merged array
+        printf("Merged Array: ");
+        for (int i = 0; i < mergedSize; ++i)
+        {
+            printf("%d ", mergedArray[i]);
+        }
+        printf("\n");
+
+        // Ask the user if they want to try again or exit
+        char tryAgain;
+        printf("Do you want to try again? (y/n): ");
+        scanf(" %c", &tryAgain);
+
+        if (tryAgain != 'y' && tryAgain != 'Y')
+        {
+            printf("Exiting function.\n");
+            return;
+        }
+    }
+    else
+    {
+        printf("Exiting program.\n");
+    }
 };
 
 // Function prototypes for 2D array operations
-void traverse2D(){
-    // Implement the function
-};
+void traverse()
+{
 
-void implementStack(){
-    // Implement the function
-};
+    int m, n;
+    pf("\nEnter number of rows: ");
+    sf("%d", &m);
+
+    pf("\nEnter number of columns: ");
+    sf("%d", &n);
+
+    int a[50][50];
+    pf("\nEnter elements of %d x %d array:\n", m, n);
+
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < n; j++)
+            sf("%d", &a[i][j]);
+    int i, j;
+
+    char choice, operation;
+
+    getchar();
+
+    pf("\nDo you want to perform an operation on stored elements? (y/n): ");
+    sf(" %c", &choice);
+
+    if (choice == 'y' || choice == 'Y')
+    {
+        pf("\nChoose an operation to perform on the stored array elements: \n");
+        pf("a. Addition\n");
+        pf("b. Subtraction\n");
+        pf("c. Multiplication\n");
+        pf("d. Division\n");
+
+        sf(" %c", &operation);
+
+        switch (operation)
+        {
+        case 'a':
+            for (i = 0; i < m; i++)
+                for (j = 0; j < n; j++)
+                    a[i][j] = a[i][j] + a[i][j];
+            break;
+        case 'b':
+            for (i = 0; i < m; i++)
+                for (j = 0; j < n; j++)
+                    a[i][j] = a[i][j] - a[i][j];
+            break;
+        case 'c':
+            for (i = 0; i < m; i++)
+                for (j = 0; j < n; j++)
+                    a[i][j] = a[i][j] * a[i][j];
+            break;
+        case 'd':
+            for (i = 0; i < m; i++)
+                for (j = 0; j < n; j++)
+                    a[i][j] = a[i][j] / a[i][j];
+            break;
+        default:
+            pf("Invalid operation choice\n");
+            return; // Return from the function if the operation is invalid
+        }
+
+        pf("\n\n %d x %d Array after Traversing:\n\n", m, n);
+        for (i = 0; i < m; i++)
+        {
+            for (j = 0; j < n; j++)
+                pf("\t%d", a[i][j]);
+            pf("\n\n");
+
+            printf("Press Any Key to Continue...");
+            getch();
+            handle2DArrayChoiceNoArgument();
+        }
+    }
+}
+
+void transpose()
+{
+    int m, n;
+    pf("\nEnter number of rows: ");
+    sf("%d", &m);
+
+    pf("\nEnter number of columns: ");
+    sf("%d", &n);
+
+    int a[10][10], b[10][10];
+    pf("\nEnter elements to be transposed:\n");
+
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < n; j++)
+            sf("%d", &a[i][j]);
+    int i, j;
+
+    pf("\nYour Array Elements before Transposing:\n");
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            pf("\t%d", a[i][j]);
+        }
+        pf("\n\n");
+    }
+
+    for (i = 0; i < m; i++)
+    {
+        for (j = 0; j < n; j++)
+        {
+            b[j][i] = a[i][j];
+        }
+    }
+
+    pf("\nYour Array Elements after Transposing:\n");
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            pf("\t%d", b[i][j]);
+        }
+        pf("\n\n");
+        printf("Press Any Key to Continue...");
+        getch();
+        handle2DArrayChoiceNoArgument();
+    }
+}
