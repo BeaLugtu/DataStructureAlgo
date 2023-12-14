@@ -13,10 +13,6 @@ void traverse1D();
 void insertSorted1D();
 void insertUnsorted1D();
 void removeElement1D();
-void mergeArray();
-
-void mergeUnsortedArrays();
-void mergeSortedArrays();
 
 // Function prototypes for 2D array operations
 void traverse2D();
@@ -88,8 +84,7 @@ void handle1DArrayChoiceNoArgument()
         printf("2. Insert Sorted\n");
         printf("3. Insert Unsorted\n");
         printf("4. Remove Element\n");
-        printf("5. Merge Array\n");
-        printf("6. Back to Main Menu\n");
+        printf("5. Back to Main Menu\n");
         printf("Enter your choice: ");
 
         // Check if input is an integer
@@ -99,34 +94,36 @@ void handle1DArrayChoiceNoArgument()
             // Clear the input buffer
             while (getchar() != '\n')
                 ;
-            return 1; // Continue the program
+            continue;
         }
 
         // Perform the corresponding operation for 1D array
         switch (choice)
         {
         case 1:
+            system("cls");
             traverse1D();
             break;
         case 2:
+            system("cls");
             insertSorted1D();
             break;
         case 3:
+            system("cls");
             insertUnsorted1D();
             break;
         case 4:
+            system("cls");
             removeElement1D();
             break;
         case 5:
-            mergeArray();
-            break;
-        case 6:
             system("cls");
-            break;
+            displayMainMenu();
         default:
-            printf("Invalid choice for 1D Array Operations\n");
+            printf("Invalid choice for 1D Array Operations! \n");
             break;
         }
+
     } while (1);
     return 1;
 }
@@ -139,8 +136,7 @@ int handle1DArrayChoice(int choice)
     printf("2. Insert Sorted\n");
     printf("3. Insert Unsorted\n");
     printf("4. Remove Element\n");
-    printf("5. Merge Array\n");
-    printf("6. Back to Main Menu\n");
+    printf("5. Back to Main Menu\n");
     printf("Enter your choice: ");
 
     // Check if input is an integer
@@ -169,9 +165,6 @@ int handle1DArrayChoice(int choice)
         removeElement1D();
         break;
     case 5:
-        mergeArray();
-        break;
-    case 6:
         system("cls");
         break;
     default:
@@ -180,48 +173,6 @@ int handle1DArrayChoice(int choice)
     }
 
     return 1; // Continue the program
-}
-
-void mergeArray()
-{
-    int choice;
-
-    while (1)
-    {
-        printf("Choose an option:\n");
-        printf("1. Merge Sorted Arrays\n");
-        printf("2. Merge UnSorted Arrays\n");
-        printf("3. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-
-        switch (choice)
-        {
-        case 1:
-        {
-            // Merge unsorted arrays
-            mergeSortedArrays();
-            break;
-        }
-
-        case 2:
-        {
-            // Merge sorted arrays
-            mergeUnsortedArrays();
-            break;
-        }
-
-        case 3:
-        {
-            return;
-        }
-
-        default:
-        {
-            break;
-        }
-        }
-    }
 }
 
 // Function to handle the user's choice for 2D array operations
@@ -663,18 +614,11 @@ void removeElement1D()
             if (tryAgain != 'y' && tryAgain != 'Y')
             {
                 printf("Exiting function.\n");
-                handle1DArrayChoiceNoArgument();
+                break;
             }
         }
     }
 }
-
-void mergeUnsortedArrays(){
-
-};
-void mergeSortedArrays(){
-
-};
 
 // Function prototypes for 2D array operations
 void traverse2D(){
